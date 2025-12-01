@@ -1,9 +1,10 @@
+from urllib.parse import urlencode, urlsplit, urlunsplit, parse_qsl
+
 from main.base_views import BaseView
 from main.models import Genre, Movie
 from main.forms import SiteReviewForm
 from django.http import HttpRequest
 from django.views.generic import View
-from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.db.models import Q
 
@@ -31,8 +32,6 @@ class HomePageView(BaseView):
         context = super().get_context_data(**kwargs)
         context['top_five_movies'] = Movie.objects.filter(is_top_five=True)
         context['ganres'] = Genre.objects.all()
-        
-        context['error_message'] = kwargs.get("error_message")
         return context
 
 
@@ -82,8 +81,21 @@ class GenreView(BaseView, PerformSearchMixin):
     
 class CreateSiteReviewView(View):
     def post(self, request: HttpRequest, *args, **kwargs):
-        data = request.POST
-        form = SiteReviewForm(data)
+        referer = request.headers.get("Referer") or "/"
+        referer_parts = urlsplit(referer)
+        referer_path = referer_parts.path or "/"
+        referer_query = dict(parse_qsl(referer_parts.query, keep_blank_values=True))
+        form = SiteReviewForm(request.POST)
+
         if form.is_valid():
             form.save()
-        return redirect(request.headers.get("Referer") + f'?error_message={error_text}')
+            referer_query.pop("error_message", None)
+            cleaned_query = urlencode(referer_query, doseq=True)
+            return redirect(urlunsplit(("", "", referer_path, cleaned_query, "")))
+
+        error_text = "; ".join(
+            error for errors in form.errors.values() for error in errors
+        ) or "Invalid data"
+        referer_query["error_message"] = error_text
+        error_query = urlencode(referer_query, doseq=True)
+        return redirect(urlunsplit(("", "", referer_path, error_query, "")))
