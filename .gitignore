@@ -1,0 +1,67 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# === Virtual environments ===
+venv/
+env/
+.venv/
+.env/
+ENV/
+env.bak/
+
+# === Django specific ===
+*.log
+*.pot
+*.pyc
+db.sqlite3
+media/
+staticfiles/
+local_settings.py
+
+# === IDE / Editors ===
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# === System ===
+.DS_Store
+Thumbs.db
+
+# === Testing / Coverage ===
+.coverage
+.tox/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+htmlcov/
+
+# === Migrations (optional, якщо не хочеш тримати початкові) ===
+# */migrations/__pycache__/
+# */migrations/*.py
+# !*/migrations/__init__.py
+
+# === Environment / Secrets ===
+*.env
+.env.*
+secrets.json
+
+# === Build / Packaging ===
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# === MyPy / Linting ===
+.mypy_cache/
+.pyre/
+.pytype/
+ruff_cache/
+
+# === Docker ===
+*.pid
+*.log
+docker-compose.override.yml

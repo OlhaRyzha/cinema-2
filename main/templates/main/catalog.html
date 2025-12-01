@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block extracss %}
+    <link rel="stylesheet" href="{% static 'main/css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>{{page_name}}</h2>
+<form action="" method="get">
+    <input type="text" name="search" placeholder="Search..." value="{{ request.GET.search }}">
+    <input type="number" name="min_duration" id="" value="{{ request.GET.min_duration }}" placeholder="Min Duration">
+    <input type="number" name="max_duration" id="" value="{{ request.GET.max_duration }}" placeholder="Max Duration">
+    <button type="submit">Search</button>
+</form>
+<div class="top-films">
+    {% for movie in movies %}
+        <div class="film-card">
+            <h3>{{ movie.name }}</h3>
+            <p class="duration">{{ movie.duration }}</p>
+            {% if movie.tag %}<span class="tag">{{ movie.tag }}</span>{% endif %}
+            <p class="genre">{{ movie.genre }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

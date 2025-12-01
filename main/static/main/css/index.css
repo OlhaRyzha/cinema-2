@@ -1,0 +1,68 @@
+.content h2 {
+    margin-bottom: 10px;
+}
+
+.content .top-films {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.content .top-films .film-card {
+    background: #afcee5;
+    padding: 10px;
+    border-radius: 10px;
+    width: calc(33% - 10px);
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.content .top-films .film-card h3 {
+    margin: 10px 0;
+    color: #333;
+}
+.content .top-films .film-card .duration {
+    color: #555;
+    font-size: 14px;
+}
+
+.content .top-films .film-card .tag {
+    background: #333;
+    color: #fff;
+    padding: 3px 7px;
+    border-radius: 5px;
+    font-size: 12px;
+}
+.content .top-films .film-card .genre {
+    margin-top: 5px;
+    color: #555;
+    font-size: 14px;
+}
+
+.ganres {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.ganres .genre-section {
+    background: #afcee5;
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.ganres .genre-section a {
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.ganres .genre-section a:hover {
+    text-decoration: underline;
+}
+.ganres .genre-section .ganre-image {
+    width: 150px;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,34 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block extracss %}
+    <link rel="stylesheet" href="{% static 'main/css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+<h2>Топ 5 найкращих фільмів</h2>
+<div class="top-films">
+    {% for movie in top_five_movies %}
+        <div class="film-card">
+            <h3>{{ movie.name }}</h3>
+            <p class="duration">{{ movie.duration }}</p>
+            {% if movie.tag %}<span class="tag">{{ movie.tag }}</span>{% endif %}
+            <p class="genre">{{ movie.genre }}</p>
+        </div>
+    {% endfor %}
+</div>
+<div class="ganres">
+    {% for ganre in ganres %}
+    <div class="genre-section">
+        <img src="{{ ganre.img }}" class="ganre-image" alt="">
+        <a href="{{ ganre.get_absolute_url }}">{{ ganre.name }}</a>
+    </div>
+    {% endfor %}
+</div>
+<!-- <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form> -->
+
+{% endblock %}
